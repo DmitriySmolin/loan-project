@@ -6,7 +6,6 @@ export default class VideoPlayer {
   }
 
   bindTriggers() {
-    debugger;
     this.btns.forEach((btn) => {
       btn.addEventListener("click", () => {
         if (document.querySelector("iframe#frame")) {
