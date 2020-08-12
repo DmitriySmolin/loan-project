@@ -1,8 +1,8 @@
 import Slider from "./slider";
 
 export default class MainSlider extends Slider {
-  constructor(page, btns) {
-    super(page, btns);
+  constructor(btns) {
+    super(btns);
   }
 
   showSlides(n) {
@@ -43,6 +43,7 @@ export default class MainSlider extends Slider {
       btn.addEventListener("click", () => {
         this.plusSlides(1);
       });
+
       btn.parentNode.previousElementSibling.addEventListener("click", (e) => {
         e.preventDefault();
         this.slideIndex = 1;

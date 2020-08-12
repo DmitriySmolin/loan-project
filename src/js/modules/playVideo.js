@@ -19,7 +19,7 @@ export default class VideoPlayer {
   }
 
   bindBtnClose() {
-    this.close.addEventListener("click", () => {
+    this.overlay.addEventListener("click", () => {
       this.overlay.style.display = "none";
       this.player.stopVideo();
     });
@@ -31,7 +31,6 @@ export default class VideoPlayer {
       width: "100%",
       videoId: `${url}`,
     });
-    console.log(this.player);
   }
 
   init() {
