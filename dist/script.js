@@ -5152,6 +5152,11 @@ window.addEventListener("DOMContentLoaded", function () {
     btns: ".next"
   });
   mainSlider.render();
+  var modulePageSlider = new _modules_slider_slider_main__WEBPACK_IMPORTED_MODULE_1__["default"]({
+    container: ".moduleapp",
+    btns: ".next"
+  });
+  modulePageSlider.render();
   var showUpSlider = new _modules_slider_slider_mini__WEBPACK_IMPORTED_MODULE_2__["default"]({
     container: ".showup__content-slider",
     prev: ".showup__prev",
@@ -5657,7 +5662,7 @@ function (_Slider) {
       }
 
       if (n < 1) {
-        this.slideIndex = this.slideIndex.length;
+        this.slideIndex = this.slides.length;
       }
 
       try {
@@ -5684,28 +5689,49 @@ function (_Slider) {
       this.showSlides(this.slideIndex += n);
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "bindTriggers",
+    value: function bindTriggers() {
       var _this2 = this;
 
-      try {
+      this.btns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          _this2.plusSlides(1);
+        });
+        btn.parentNode.previousElementSibling.addEventListener("click", function (e) {
+          e.preventDefault();
+          _this2.slideIndex = 1;
+
+          _this2.showSlides(_this2.slideIndex);
+        });
+      });
+      this.showSlides(this.slideIndex);
+      document.querySelectorAll(".prevmodule").forEach(function (item) {
+        item.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          _this2.plusSlides(-1);
+        });
+      });
+      document.querySelectorAll(".nextmodule").forEach(function (item) {
+        item.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          _this2.plusSlides(1);
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.container) {
         try {
           this.hanson = document.querySelector(".hanson");
         } catch (error) {}
 
-        this.btns.forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            _this2.plusSlides(1);
-          });
-          btn.parentNode.previousElementSibling.addEventListener("click", function (e) {
-            e.preventDefault();
-            _this2.slideIndex = 1;
-
-            _this2.showSlides(_this2.slideIndex);
-          });
-        });
-        this.showSlides(this.slideIndex);
-      } catch (error) {}
+        this.bindTriggers();
+      }
     }
   }]);
 
